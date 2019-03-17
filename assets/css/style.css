@@ -1,0 +1,88 @@
+body {
+    background-color: black;
+    color: aquamarine;
+}
+img {
+    height: 100px;
+    width: 100px;
+}
+.jumbotron {
+    background-image: url("https://i2.ytimg.com/vi/VmHrFBQxpCA/0.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    padding: 5rem 1rem;
+}
+.display-4 {
+    color: rgb(255, 230, 0);
+    font-weight: bolder;
+    text-align: center;
+}
+#crystals {
+    background-color: rgb(49, 47, 47);
+    text-align: center;
+    width: fit-content;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+.crystal-image {
+    margin-inline-end: 30px;
+    margin-inline-start: 30px;
+    
+}
+.crystal-image:hover {
+    border-style: ridge;
+    border-color: gold;
+    border-width: 5px;
+    background-color: black;
+}
+.crystal-image:active {
+    background-color: gold;
+    border-color: lawngreen;
+    border-width: 5px;
+    width: 120px;
+    height: 120px;
+}
+#content-div {
+    border-style: ridge;
+    border-color: blueviolet;
+    border-width: 5px;
+    margin-bottom: 30px;
+}    
+#target-number {
+    color: crimson;
+    font-size: xx-large;
+}
+#current-score {
+    color: gold;
+    margin: auto;
+    font-size: xx-large
+}
+#losses {
+    color: crimson;
+    font-size: larger;
+}
+#wins {
+    color: lawngreen;
+    font-size: larger;
+}
+.col-sm-auto {
+    margin-inline-end: 30px;
+    margin-inline-start: 30px;
+}
+
+
+
+@media (min-width: 576px) {
+    .jumbotron {
+        padding: 8rem 2rem;
+        max-width: 768px;
+        background-position: center;
+        margin: auto;
+
+    }
+}

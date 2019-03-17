@@ -1,0 +1,126 @@
+$(document).ready(function() {
+    // ... we generate a random number between 19-120 for the purpose of this game.
+    //  set variables for our random number generator to be between 19-min and 120-max.
+    var wins = 0;
+    var losses = 0;
+    var min = 19; 
+    var max = 120;
+    var startGame = true;
+    var targetNumber;
+    var arr = [];
+    var numberOptions;
+    // var targetNumber =Math.floor(Math.random() * (+max - +min)) + +min;  
+    var counter = 0; // variable to hold our score.
+    // ... and then dump the random number into our random-number div in our html document.
+    // $("#target-number").text(targetNumber);
+    target(); // initial call to start
+    // function to get new random number when called.
+    function target() {
+        // uses our min and max values define in our global variables as 19 & 120.
+        targetNumber =Math.floor(Math.random() * (+max - +min)) + +min;
+        // displays the number via .text to our target div element #target-number.
+        $("#target-number").text(targetNumber);
+        // calls the randomNumber function to generate random numbers for each crystal value.
+        randomNumber();
+    }
+    // function to get new random values for crystls when called
+    function randomNumber() {
+        // limit our array to only 4 elements.
+        while (arr.length < 4) {
+            // randomly generates a number between 1 and 12 
+            numberOptions = Math.floor((Math.random() * 12) + 1);
+            // pushes a unique random number for each iteration arr.length < 4.
+            if (arr.indexOf(numberOptions) === -1) {
+                // push each random iteration to our array until we get 4 numbers.
+                arr.push(numberOptions);
+            }
+        }
+    }
+    //check our crystal values
+    console.log(arr)
+
+    // setting all the elements for the crystal images.
+    // we declare a new img element for each separate crystal image
+    // we add our class and attrs to each of these variables.
+    
+    // 1st crystal
+    var imageCrystal1 = $("<img>");
+    imageCrystal1.addClass("crystal-image");
+    imageCrystal1.attr("src", "assets/images/crystal1.png");
+    imageCrystal1.attr("data-crystalvalue", arr[0]);
+
+    // 2nd crystal
+    var imageCrystal2 = $("<img>");
+    imageCrystal2.addClass("crystal-image");
+    imageCrystal2.attr("src", "assets/images/crystal2.png");
+    imageCrystal2.attr("data-crystalvalue", arr[1]);
+    
+    // 3rd crystal
+    var imageCrystal3 = $("<img>");
+    imageCrystal3.addClass("crystal-image");
+    imageCrystal3.attr("src", "assets/images/crystal3.png");
+    imageCrystal3.attr("data-crystalvalue", arr[2]);
+    
+    // 4th crystal
+    var imageCrystal4 = $("<img>");
+    imageCrystal4.addClass("crystal-image");
+    imageCrystal4.attr("src", "assets/images/crystal4.png");
+    imageCrystal4.attr("data-crystalvalue", arr[3]);
+    
+    // here we append the images to our div id location in our html div id="crystals".
+    $("#crystals").append(imageCrystal1);
+    $("#crystals").append(imageCrystal2);
+    $("#crystals").append(imageCrystal3);
+    $("#crystals").append(imageCrystal4);
+    
+    // setting up our .on click function for when we click on the crystal images
+    $(".crystal-image").on("click", function() {
+        // create a new varibale to store the data-crystalvalue we assigned above
+        var crystalValue = ($(this).attr("data-crystalvalue"));
+        // turn our variable into an integer to do math with.
+        crystalValue = parseInt(crystalValue);
+        // adds the crystal value to our counter to keep track of user current score.
+        counter += crystalValue;
+        // modifies our html with our new value for our counter variable @ div location id=current-score.
+        $("#current-score").text(counter);
+
+
+        // setting up our win/loss conditions
+        if (targetNumber === counter) {
+            alert("Hurray You Won")
+            // adds 1 to our wins count
+            wins++;
+            // rewrites our html wins div with new count
+            $("#wins").text(wins);
+            // calls a reset to play again
+            reset();
+        } 
+        // when we miss our target number starts our loss condition
+        else if (targetNumber < counter) {
+            alert("Too Bad, Try Again!")
+            // adds 1 to our losses count
+            losses++;
+            // rewrites our losses count in our html
+            $("#losses").text(losses);
+            // calls a reset to play again
+            reset();
+        }
+
+    });
+    // reset function set up
+    function reset() {
+        // reset values for count
+        counter = 0;
+        // rewrites html with reset value
+        $("#current-score").text(counter);
+        arr = [];
+        // calls the funtion above to generate a new target number for the next game.
+        target();
+        // CRITICAL must reset our crystal values again, otherwise the crystals will not pick up the new values generated by our randomNumber function above.
+        imageCrystal1.attr("data-crystalvalue", arr[0]);
+        imageCrystal2.attr("data-crystalvalue", arr[1]);
+        imageCrystal3.attr("data-crystalvalue", arr[2]);
+        imageCrystal4.attr("data-crystalvalue", arr[3]);
+    }
+
+});
